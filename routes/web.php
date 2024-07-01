@@ -1,0 +1,37 @@
+<?php
+
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\LevelController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Route;
+
+
+
+
+
+Route::get('/', function () {
+    return view('welcome');
+});
+
+
+Route::resource('/' , LoginController::class);
+Route::post('actionlogin' , [LoginController::class , 'actionLogin'])->name('actionlogin');
+Route::post('actionlogout' , [LoginController::class , 'actionLogout'])->name('actionLogout');
+
+Route::resource('dashboard' , DashboardController::class);
+
+
+
+Route::resource('user', UserController::class);
+Route::get('/users/restore' , [UserController::class, 'showTrashed'])->name('user.restore');
+Route::post('/user/restore' , [UserController::class, 'restoreTrashed'])->name('user.restores');
+Route::post('/user/forceDelete' , [UserController::class, 'forceDelete'])->name('user.forceDelete');
+
+Route::middleware(['auth', 'administrator'])->group(function(){
+    
+    Route::resource('levels', LevelController::class);
+    Route::get('/level/history' , [LevelController::class, 'showTrashed'])->name('levelhistory');
+    Route::post('/level/restore' , [LevelController::class,'restoreTrashed'])->name('level.restores');
+
+});
