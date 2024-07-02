@@ -49,16 +49,16 @@
               <div data-i18n="Without navbar">Level</div>
             </a>
           </li>
-          {{-- <li class="menu-item">
-            <a href="#" class="menu-link">
-              <div data-i18n="Container">Jurusan</div>
+          <li class="menu-item">
+            <a href="{{ route('member.index') }}" class="menu-link">
+              <div data-i18n="Container">Member</div>
             </a>
-          </li> --}}
-          {{-- <li class="menu-item">
-            <a href="#" class="menu-link">
-              <div data-i18n="Fluid">Gelombang</div>
+          </li>
+          <li class="menu-item">
+            <a href="{{ route('book.index') }}" class="menu-link">
+              <div data-i18n="Fluid">Books</div>
             </a>
-          </li> --}}
+          </li>
 
            @endif
 

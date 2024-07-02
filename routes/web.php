@@ -1,10 +1,14 @@
 <?php
 
+use App\Http\Controllers\BookController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LevelController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\MemberController;
+use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+
 
 
 
@@ -33,5 +37,16 @@ Route::middleware(['auth', 'administrator'])->group(function(){
     Route::resource('levels', LevelController::class);
     Route::get('/level/history' , [LevelController::class, 'showTrashed'])->name('levelhistory');
     Route::post('/level/restore' , [LevelController::class,'restoreTrashed'])->name('level.restores');
+
+    Route::resource('book', BookController::class);
+    Route::get('/books/restore' , [BookController::class, 'showTrashed'])->name('bookhistory');
+    Route::post('/books/restore' , [BookController::class , 'restoreTrashed'])->name('book.restores');
+    
+    Route::resource('member' , MemberController::class);
+    Route::get('/members/history' , [MemberController::class, 'showTrashed'])->name('memberhistory');
+    Route::post('/members/restore' , [MemberController::class, 'restoreTrashed'])->name('member.restores');
+
+    Route::resource('loan' , TransactionController::class);
+    // Route::get('')
 
 });
