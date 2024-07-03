@@ -4,7 +4,7 @@
 <div class="col-xl">
     <div class="card mb-4">
       <div class="card-header d-flex justify-content-between align-items-center">
-        <h5 class="mb-0">Tambah User</h5>
+        <h5 class="mb-0">Add User</h5>
         <small class="text-muted float-end">User menu</small>
       </div>
       <div class="card-body">
@@ -13,7 +13,7 @@
             @csrf
 
           <div class="mb-3">
-            <label class="form-label" for="basic-default-fullname">Nama User</label>
+            <label class="form-label" for="basic-default-fullname">Username</label>
             <input name="name" type="text" class="form-control" id="basic-default-fullname" placeholder="Masukan nama lengkap anda"/>
           </div>
           <div class="mb-3">
@@ -25,10 +25,10 @@
             <input name="password" type="password" class="form-control" id="basic-default-fullname" placeholder="Masukan password anda"/>
           </div>
           <div class="mb-3">
-            <label class="form-label" for="basic-default-fullname">Pilih Level</label>
+            <label class="form-label" for="basic-default-fullname">Select level</label>
             <br>
             <select name="id_level" id="">
-              <option value="" disabled>Pilih level</option>
+              <option value="" disabled>Choose level</option>
               @foreach ($levels as $level)
               <option value="{{ $level->id }}">{{ $level->nama_level }}</option>
               @endforeach
@@ -37,7 +37,7 @@
 
 
           <button type="submit" value="Update" class="btn btn-primary">Send</button>
-          <a href="{{url()->previous() }}" class="btn btn-primary">Kembali</a>
+          <a href="{{url()->previous() }}" class="btn btn-primary">Back</a>
         </form>
 
 

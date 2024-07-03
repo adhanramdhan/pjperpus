@@ -8,6 +8,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Level extends Model
 {
+    // const AllLevel = 1 || 2 || 3 || 4 || 5 || 6 || 7 || 8 || 9 || 10;
+    // const enth = 1 || 2;
+
     use HasFactory;
     use SoftDeletes;
 

@@ -37,6 +37,7 @@ Route::middleware(['auth', 'administrator'])->group(function(){
     Route::resource('levels', LevelController::class);
     Route::get('/level/history' , [LevelController::class, 'showTrashed'])->name('levelhistory');
     Route::post('/level/restore' , [LevelController::class,'restoreTrashed'])->name('level.restores');
+});
 
     Route::resource('book', BookController::class);
     Route::get('/books/restore' , [BookController::class, 'showTrashed'])->name('bookhistory');
@@ -46,7 +47,9 @@ Route::middleware(['auth', 'administrator'])->group(function(){
     Route::get('/members/history' , [MemberController::class, 'showTrashed'])->name('memberhistory');
     Route::post('/members/restore' , [MemberController::class, 'restoreTrashed'])->name('member.restores');
 
-    Route::resource('loan' , TransactionController::class);
-    // Route::get('')
-
-});
+    Route::resource('transaction' , TransactionController::class);
+    Route::get('showTrx' , [TransactionController::class, 'showTrx'])->name('showTrx');
+    Route::get('returnabook' , [TransactionController::class, 'returnabook'])->name('returnabook');
+    Route::get('loaning' , [TransactionController::class, 'loaning'])->name('loaning');
+    Route::post('loaningstore' , [TransactionController::class, 'loaningstore'])->name('loaningstore');
+    // Route::get('loaningstore' , [TransactionController::class, 'loaningstore']);

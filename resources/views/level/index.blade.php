@@ -17,7 +17,7 @@
         <thead>
           <tr>
             <th>No</th>
-            <th>Nama Level</th>
+            <th>Level name</th>
             <th>Actions</th>
           </tr>
         </thead>

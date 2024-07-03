@@ -56,7 +56,7 @@ class MemberController extends Controller
     public function update(Request $request, string $id)
     {
         member::where('id', $id)->update([
-            'nama_anggota' => $request->nama_anggota,
+            'member_name' => $request->member_name,
             'email' => $request->email,
             'no_tlp' => $request->no_tlp,
         ]);

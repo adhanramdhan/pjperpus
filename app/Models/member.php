@@ -11,7 +11,7 @@ class member extends Model
     use HasFactory;
     use SoftDeletes;
     
-    protected $fillable = ['nama_anggota', 'email' , 'no_tlp'];
+    protected $fillable = ['member_name', 'email' , 'no_tlp'];
 
 
     public function transaksi()

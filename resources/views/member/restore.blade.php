@@ -27,7 +27,7 @@
                     <td>
                         <input type="checkbox" name="ids[]" value="{{ $data->id }}">
                     </td>
-                    <td>{{$data->nama_anggota}}</td>
+                    <td>{{$data->member_name}}</td>
                     <td>{{$data->email}}</td>
                 </tr>
                 @endforeach

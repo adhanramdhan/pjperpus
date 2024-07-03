@@ -13,11 +13,11 @@
             @csrf
 
           <div class="mb-3">
-            <label class="form-label" for="basic-default-fullname">Nama Level</label>
-            <input name="nama_level" type="text" class="form-control" id="basic-default-fullname" placeholder="Masukan nama level anda"/>
+            <label class="form-label" for="basic-default-fullname">Level Name</label>
+            <input name="nama_level" type="text" class="form-control" id="basic-default-fullname" placeholder="Input your level name"/>
           </div>
           <button type="submit" value="Update" class="btn btn-primary">Send</button>
-          <a href="{{url()->previous() }}" class="btn btn-primary">Kembali</a>
+          <a href="{{url()->previous() }}" class="btn btn-primary">Back</a>
         </form>
 
 

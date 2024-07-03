@@ -13,8 +13,8 @@
             @csrf
 
           <div class="mb-3">
-            <label class="form-label" for="basic-default-fullname">Nama member</label>
-            <input name="nama_anggota" type="text" class="form-control" id="basic-default-fullname" placeholder="Masukan nama lengkap anda"/>
+            <label class="form-label" for="basic-default-fullname">Member Name</label>
+            <input name="member_name" type="text" class="form-control" id="basic-default-fullname" placeholder="Input your member name"/>
           </div>
           <div class="mb-3">
             <label class="form-label" for="basic-default-fullname">Email</label>

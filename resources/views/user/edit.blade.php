@@ -13,7 +13,7 @@
             @csrf
             @method('PUT')
           <div class="mb-3">
-            <label class="form-label" for="basic-default-fullname">Nama User</label>
+            <label class="form-label" for="basic-default-fullname">Username</label>
             <input name="name" type="text" class="form-control" id="basic-default-fullname" value="{{ $edit->name}}"/>
           </div>
           <div class="mb-3">
@@ -25,10 +25,10 @@
             <input name="password" type="password" class="form-control" id="basic-default-fullname" placeholder="***"/>
           </div>
           <div class="mb-3">
-            <label class="form-label" for="basic-default-fullname">Pilih Level</label>
+            <label class="form-label" for="basic-default-fullname">Select level</label>
             <br>
             <select name="id_level" id="">
-              <option value="" disabled>Pilih level</option>
+              <option value="" disabled>Choose level</option>
               @foreach ($levels as $level)
               <option value="{{ $level->id }}" {{ $level->id == $edit->id ? 'selected' : '' }} >{{ $level->nama_level }}</option>
               @endforeach
@@ -36,6 +36,7 @@
           </div>
 
           <button type="submit" value="Update" class="btn btn-primary">Send</button>
+          <a href="{{ url()->previous() }}" class="btn btn-primary">Back</a>
         </form>
 
       </div>

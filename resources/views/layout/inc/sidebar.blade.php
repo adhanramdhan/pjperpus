@@ -1,3 +1,11 @@
+          @php
+          $Alluser = [1,2,3,4,5,6,7,8,9,10];
+          $karyawan = [1,2,3];
+          $Tamu = [4-10];
+          @endphp
+
+
+
 <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
     <div class="app-brand demo">
       <a href="index.html" class="app-brand-link">
@@ -16,7 +24,7 @@
 
  
         
-  
+
       <!-- Dashboard -->
       <li class="menu-item active">
         <a href="{{route('dashboard.index')}}" class="menu-link">
@@ -34,21 +42,20 @@
           <div data-i18n="Layouts">Data Masters</div>
         </a>
 
-       
-
         <ul class="menu-sub">
 
+          @if (Auth::user()->id_level == 1)
           <li class="menu-item">
             <a href="{{ route('user.index') }}" class="menu-link">
               <div data-i18n="Without menu">Users</div>
             </a>
           </li>
-          @if (Auth::user()->id_level == 1)
           <li class="menu-item">
             <a href="{{ route('levels.index') }}" class="menu-link">
               <div data-i18n="Without navbar">Level</div>
             </a>
           </li>
+          @endif
           <li class="menu-item">
             <a href="{{ route('member.index') }}" class="menu-link">
               <div data-i18n="Container">Member</div>
@@ -60,48 +67,60 @@
             </a>
           </li>
 
-           @endif
 
+          
           {{-- <li class="menu-item">
             <a href="#" class="menu-link">
               <div data-i18n="Blank">Data Peserta</div>
             </a>
           </li> --}}
-
+          
         </ul>
       </li>
 
-      {{-- <li class="menu-item">
-          <a href="javascript:void(0);" class="menu-link menu-toggle">
+      
+      @if (in_array(Auth::user()->id_level , $karyawan))
+      <li class="menu-item">
+        <a href="javascript:void(0);" class="menu-link menu-toggle">
             <i class="menu-icon tf-icons bx bxs-data"></i>
-            <div data-i18n="Layouts">Data History</div>
+            <div data-i18n="Layouts">Data Transaction</div>
           </a>
-
+          
           <ul class="menu-sub">
             <li class="menu-item">
-              <a href="{{ route('histroy.gelombang1') }}" class="menu-link">
-                <div data-i18n="Without menu">Gelombang 1</div>
+              <a href="{{ route('loaning') }}" class="menu-link">
+                <div data-i18n="Container">Loan a book</div>
               </a>
             </li>
             <li class="menu-item">
-              <a href="{{ route('histroy.gelombang2') }}" class="menu-link">
-                <div data-i18n="Without navbar">Gelombang 2</div>
+              <a href="{{ route('showTrx') }}" class="menu-link">
+                <div data-i18n="Without menu">Transaction</div>
               </a>
             </li>
             <li class="menu-item">
-              <a href="{{ route('histroy.gelombang3') }}" class="menu-link">
-                <div data-i18n="Container">Gelombang 3</div>
+              <a href="{{ route('returnabook') }}" class="menu-link">
+                <div data-i18n="Without navbar">Return a book</div>
               </a>
             </li>
           </ul>
-      </li> --}}
-
-      {{-- <li class="menu-item">
-          <a href="{{ route('pengumuman') }}" class="menu-link">
-            <i class="menu-icon tf-icons bx bx-file"></i>
-            <div data-i18n="Analytics">Pengumuman</div>
+      </li>
+        @endif
+        
+        {{-- <li class="menu-item">
+          <a href="{{ route('showTrx') }}" class="menu-link">
+            <i class="menu-icon tf-icons bx bxs-file-plus"></i>
+            <div data-i18n="Analytics">Transaction Book</div>
           </a>
         </li> --}}
+          
+        @if (in_array(Auth::user()->id_level, $Alluser))
+        <li class="menu-item">
+          <a href="#" class="menu-link">
+            <i class="menu-icon tf-icons bx bx-home"></i>
+            <div data-i18n="Analytics">Page for loan</div>
+          </a>
+        </li>
+        @endif
 
     </ul>
   </aside>

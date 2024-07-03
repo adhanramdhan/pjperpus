@@ -17,7 +17,7 @@
         <thead>
           <tr>
             <th>No</th>
-            <th>Nama member</th>
+            <th>Member Name</th>
             <th>Email</th>
             <th>No hp</th>
             <th>Actions</th>
@@ -29,7 +29,7 @@
 
           <tr>
             <td><i class="fab fa-react fa-lg text-info me-3"></i><strong>{{ $loop->iteration }}</strong></td>
-            <td>{{$data->nama_anggota}}</td>
+            <td>{{$data->member_name}}</td>
             <td>{{$data->email}}</td>
             <td>{{$data->no_tlp}}</td>
             <td>

@@ -33,7 +33,7 @@
                 <div class="app-brand justify-content-center">
                   <a href="index.html" class="app-brand-link gap-2">
                     <span class="app-brand-logo demo">
-                      <img src="{{asset('assets/admin/assets/img/helocat.gif')}}" alt="" width="50" height="50">
+                      <img src="{{asset('assets/admin/assets/img/ppkd.jpg')}}" alt="" width="50" height="50">
                     </span>
                     <span class="app-brand-text demo text-body fw-bolder">Perpustakaan Adhan Makmur Sejahtera</span>
                   </a>
@@ -52,86 +52,87 @@
                                     <small class="text-muted float-end">Loan transaction for member</small>
                                 </div>
 
-                                <form action="{{ route('showTrx') }}" method="get" class="card-body row g-3">
-                                  @csrf
-                                      <div class="col-md-6">
-                                          <div class="mb-3 row">
-                                              <label for="html5-search-input" class="col-md-2 col-form-label">Search Name</label>
-                                              <div class="col-md-10">
-                                                  <input name="search" class="form-control" type="search" value="{{ request('search') }}" id="html5-search-input" />
-                                              </div>
-                                          </div>                              
-                                      </div>
 
-                                      <div class="col-md-6">
+                                <form method="GET" action="" class="mb-4">
+                                  <div class="row">
+                                      <div class="col-md-4">
+                                          <input type="text" name="search" class="form-control" placeholder="Cari berdasarkan nama" value="{{ request('search') }}">
+                                      </div>
+                                      <div class="col-md-4">
+                                          {{-- <select name="jurusan" class="form-control">
+                                              <option value="">Pilih Jurusan</option>
+                                              @foreach($jurusans as $jurusan)
+                                                  <option value="{{ $jurusan->id }}" {{ request('jurusan') == $jurusan->id ? 'selected' : '' }}>
+                                                      {{ $jurusan->nama_jurusan }}
+                                                  </option>
+                                              @endforeach
+                                          </select> --}}
+                                      </div>
+                                      <div class="col-md-4">
+                                          <button type="submit" class="btn btn-primary">Filter</button>
+                                          {{-- <a href="{{ route('peserta.index') }}" class="btn btn-secondary">Reset</a> --}}
+                                      </div>
+                                  </div>
+                              </form>
+
+
+
+                                <form action="#" method="post" class="card-body row g-3">
+                                    @csrf
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label class="form-label" for="basic-default-fullname">member name</label>
+                                            <input name="nama_lengkap" type="text" class="form-control" id="basic-default-fullname" placeholder="member name" />
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label" for="basic-default-company">no transaction</label>
+                                            <input readonly name="kartu_keluarga" type="text" class="form-control" id="basic-default-company" placeholder="number trx" />
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
                                         <div class="mb-3">
                                             <label class="form-label" for="basic-default-fullname">New member</label>
                                             <br>
                                             <a href="{{ route('member.create') }}" class="btn btn-primary">Add member</a>
                                         </div>
                                     </div>
-                                  </form>
-                              
 
-                                <form action="{{ route('loaningstore') }}" method="post" class="card-body row g-3">
-                                    @csrf
-                                    <div class="col-md-6">         
-
-                                      <div class="input-group">
-                                        <div class="input-group-text">
-                                            <input
-                                                class="form-check-input"
-                                                type="checkbox"
-                                                value=""
-                                                id="disabledCheck2"
-                                                {{ isset($memberz) ? 'checked' : '' }}
-                                                disabled
-                                            />
-                                        </div>
-                                        <input type="hidden" name="id_member" value="{{ isset($memberz) ? $memberz->id : '' }}" />
-                                        <input disabled type="text" class="form-control" aria-label="Text input with checkbox"
-                                            value="{{ isset($memberz) ? $memberz->member_name : '' }}" />  {{-- Tampilkan hasil pencarian di sini --}}
-                                    </div>
-
-
-                                    <br>
-
-                                        <div class="mb-3">
-                                            <label class="form-label" for="basic-default-company">no transaction</label>
-                                            <input readonly name="no_trx" type="text" class="form-control" id="basic-default-company" placeholder="" value="{{ $transactionCode }}" />
-                                        </div>
-                                    </div>
-
-                               
+                                    {{-- <div class="mb-3">
+                                        <label class="form-label" for="basic-default-message">Aktivitas saat ini</label>
+                                        <textarea
+                                            name="aktivitas_saat_ini"
+                                            id="basic-default-message"
+                                            class="form-control"
+                                            placeholder="Ceritakan aktivitas yang anda lakukan saat ini"
+                                        ></textarea>
+                                    </div> --}}
 
                                     <div class="col-12 text-end">
-                                      <a href="{{ url()->previous() }}" class="btn btn-primary">Back</a>
+                                        <button type="submit" class="btn btn-primary">Add</button>
                                     </div>
-                                    <button type="submit" class="btn btn-primary">Add</button>
+                                   <a href="{{ url()->previous() }}" class="btn btn-primary">Kembali</a>
 
                                 </form>
-
                             </div>
 
 
                             <div class="card mb-4">
                                 <div class="card-header d-flex justify-content-between align-items-center">
-                                    <h5 class="mb-0">Ini data apa?!</h5>
+                                    <h5 class="mb-0">Masukan data diri anda!</h5>
                                     <small class="text-muted float-end">Default label</small>
                                 </div>
                                 
                                 <table class="table">
-                                  <div align="right" class="m-b">
-                                    <button type="button" class="btn btn-primary m-3 btn-add">Tambah</button>
-                                  </div>
                                   <thead>
                                     <tr>
                                       <th>No</th>
-                                      <th>action</th>
-                                      <th>books name</th>
-                                      <th>date of loan</th>
-                                      <th>date of return</th>
-                                      <th>description</th>
+                                      <th>Action</th>
+                                      <th>Books name</th>
+                                      <th>Loaner name</th>
+                                      <th>Date of loan</th>
+                                      <th>Date of return</th>
+                                      <th>Description</th>
                                     </tr>
                                   </thead>
                                   <tbody class="table-border-bottom-0">
@@ -140,10 +141,14 @@
                                     {{-- @foreach ($datas as $data) --}}
                                       
                                     <tr>
-                                      <td><i class="fab fa-react fa-lg text-info me-3"></i><strong>#1</strong></td>
+                                      <td><i class="fab fa-react fa-lg text-info me-3"></i><strong>###</strong></td>
                                       <td>
                                           <div class="col-lg-4 col-md-6">
                                             <div class="mt-3">
+                          
+                                              <a class="btn btn-info" href="">
+                                                <i class="bx bx-edit-alt me-1"></i>Edit
+                                              </a>
                           
                                               <button
                                               type="button"
@@ -151,7 +156,7 @@
                                               data-bs-toggle="modal"
                                               data-bs-target="#modalToggle"
                                               >
-                                              <i class="bx bx-trash me-1"></i>delete
+                                              <i class="bx bx-printer me-1"></i>print
                                               </button>
                           
                                               <!-- Modal 1-->
@@ -193,30 +198,13 @@
                                             </div>
                                           </div>
                                       </td>
-                                      <td>
-                                        <select name="id_book[]" id="">
-                                          <option value="">Select books</option>
-                                          <option value=""></option>
-                                        </select>
-                                      </td>
-                                      <td>
-                                          <div class="col-md-10">
-                                            <input class="form-control" type="date" value="2021-06-18" id="html5-date-input" />
-                                          </div>
-                                      </td>
-                                      <td>
-                                        <div class="col-md-10">
-                                          <input class="form-control" type="date" value="2021-06-18" id="html5-date-input" />
-                                        </div>
-                                      </td>
-                                      <td>#</td>
                                     </tr>
                                       
                                       {{-- @endforeach --}}
                                   </tbody>
                                 </table>
 
-                              
+
                             </div>
                         </div>
                     </div>
@@ -239,11 +227,5 @@
       </div>
 
   @include('layout.inc.js')
-
-  <script>
-    $('.btn-add').click(function() {
-      alert('kontol');-
-    });
-  </script>
   </body>
 </html>

@@ -9,4 +9,9 @@ class loan extends Model
 {
     use HasFactory;
     protected $fillable = ['id_member' , 'no_trx'];
+
+    public function loanname()
+    {
+        return $this->belongsTo(member::class , 'id_member');
+    }
 }
