@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->integer('id_loaners');
             $table->integer('id_book');
+            $table->integer('id_book_img')->nullable();
             $table->datetime('dateOfreturn');
             $table->datetime('dateOfloan');
             $table->text('descriptions');

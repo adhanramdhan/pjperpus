@@ -39,12 +39,38 @@
                   </a>
                 </div>
 
+                
+                <form action="{{ route('showTrx') }}" method="get" class="card-body row g-3">
+                  @csrf
+                      <div class="col-md-6">
+                          <div class="mb-3 row">
+                              <label for="html5-search-input" class="col-md-2 col-form-label">Search Name</label>
+                              <div class="col-md-10">
+                                  <input name="search" class="form-control" type="search" value="{{ request('search') }}" id="html5-search-input" />
+                              </div>
+                          </div>                              
+                      </div>
+
+                      <div class="col-md-6">
+                        <div class="mb-3">
+                            <label class="form-label" for="basic-default-fullname">New member</label>
+                            <br>
+                            <a href="{{ route('member.create') }}" class="btn btn-primary">Add member</a>
+                        </div>
+                    </div>
+
+                    
+                  </form>
+              
+
 
                 <div class="container-xxl flex-grow-1 container-p-y">
                     <h4 class="fw-bold py-3 mb-1">Data Loan<h6 class="text-muted fw-light">Senyum. Sapa, Salam</h6></h4>
 
                     <!-- Basic Layout -->
                     <div class="row">
+                      <form action="{{ route('loaningstore') }}" method="post" class="card-body row g-3">
+                        @csrf
                         <div class="col-xl-12">
                             <div class="card mb-4">
                                 <div class="card-header d-flex justify-content-between align-items-center">
@@ -52,29 +78,8 @@
                                     <small class="text-muted float-end">Loan transaction for member</small>
                                 </div>
 
-                                <form action="{{ route('showTrx') }}" method="get" class="card-body row g-3">
-                                  @csrf
-                                      <div class="col-md-6">
-                                          <div class="mb-3 row">
-                                              <label for="html5-search-input" class="col-md-2 col-form-label">Search Name</label>
-                                              <div class="col-md-10">
-                                                  <input name="search" class="form-control" type="search" value="{{ request('search') }}" id="html5-search-input" />
-                                              </div>
-                                          </div>                              
-                                      </div>
 
-                                      <div class="col-md-6">
-                                        <div class="mb-3">
-                                            <label class="form-label" for="basic-default-fullname">New member</label>
-                                            <br>
-                                            <a href="{{ route('member.create') }}" class="btn btn-primary">Add member</a>
-                                        </div>
-                                    </div>
-                                  </form>
-                              
-
-                                <form action="{{ route('loaningstore') }}" method="post" class="card-body row g-3">
-                                    @csrf
+                                
                                     <div class="col-md-6">         
 
                                       <div class="input-group">
@@ -104,12 +109,7 @@
 
                                
 
-                                    <div class="col-12 text-end">
-                                      <a href="{{ url()->previous() }}" class="btn btn-primary">Back</a>
-                                    </div>
-                                    <button type="submit" class="btn btn-primary">Add</button>
-
-                                </form>
+                                  
 
                             </div>
 
@@ -135,90 +135,38 @@
                                     </tr>
                                   </thead>
                                   <tbody class="table-border-bottom-0">
+                                      <form action="" method="POST">
+                                        @csrf
+                                        <td>#</td>
+                                        <td><button type='button' class='btn btn-danger' data-bs-toggle='modal' data-bs-target='#modalToggle'><i class='bx bx-trash me-1'></i>delete</button></td>
+                                        <td>
+                                          <select name='id_book[]' id=''>
+                                            <option value=''>Select books</option>
+                                            @foreach ($books as $book)
+                                              
+                                            <option value='{{ $book->id }}'>{{ $book->books_name }}</option>
+                                            @endforeach
+                                          </select>
+                                          </td>
+                                          <td><input type='date' name='dateOfloan[]' class='form-control'></td>
+                                          <td><input type='date' name='dateOfreturn[]' class='form-control'></td>
+                                          <td><input type='text' name='description[]' class='form-control'></td>
+
+
                                       
-                          
-                                    {{-- @foreach ($datas as $data) --}}
-                                      
-                                    <tr>
-                                      <td><i class="fab fa-react fa-lg text-info me-3"></i><strong>#1</strong></td>
-                                      <td>
-                                          <div class="col-lg-4 col-md-6">
-                                            <div class="mt-3">
-                          
-                                              <button
-                                              type="button"
-                                              class="btn btn-danger"
-                                              data-bs-toggle="modal"
-                                              data-bs-target="#modalToggle"
-                                              >
-                                              <i class="bx bx-trash me-1"></i>delete
-                                              </button>
-                          
-                                              <!-- Modal 1-->
-                                                <div
-                                                class="modal fade"
-                                                id="modalToggle"
-                                                aria-labelledby="modalToggleLabel"
-                                                tabindex="-1"
-                                                style="display: none"
-                                                aria-hidden="true"
-                                                >
-                                                              <div class="modal-dialog modal-dialog-centered">
-                                                                  <div class="modal-content">
-                                                                    <div class="modal-header">
-                                                                      <h5 class="modal-title" id="modalToggleLabel">
-                                                                          Apakah anda yakin ingin menghapus data ini?
-                                                                        </h5>
-                                                                        <button
-                                                                          type="button"
-                                                                          class="btn-close"
-                                                                          data-bs-dismiss="modal"
-                                                                          aria-label="Close"
-                                                                      ></button>
-                                                                      </div>
-                                                                      <div class="modal-body">
-                                                                          Data yang terhapus akan dipindahkan ke riwayat hapus. Anda yakin?
-                                                                      </div>
-                                                                      <div class="modal-footer">
-                                                                          <form action="" method="POST">
-                                                                              @csrf
-                                                                              @method('DELETE')
-                                                                              <button type="submit" class="btn btn-danger">
-                                                                                  <i class="bx bx-trash me-1"></i> Ya, Hapus!</button>
-                                                                          </form>
-                                                                      </div>
-                                                                  </div>
-                                                              </div>
-                                                </div>
-                                            </div>
-                                          </div>
-                                      </td>
-                                      <td>
-                                        <select name="id_book[]" id="">
-                                          <option value="">Select books</option>
-                                          <option value=""></option>
-                                        </select>
-                                      </td>
-                                      <td>
-                                          <div class="col-md-10">
-                                            <input class="form-control" type="date" value="2021-06-18" id="html5-date-input" />
-                                          </div>
-                                      </td>
-                                      <td>
-                                        <div class="col-md-10">
-                                          <input class="form-control" type="date" value="2021-06-18" id="html5-date-input" />
-                                        </div>
-                                      </td>
-                                      <td>#</td>
-                                    </tr>
-                                      
-                                      {{-- @endforeach --}}
-                                  </tbody>
-                                </table>
+                                      </form>
+                                    </tbody>
+                                  </table>
 
                               
                             </div>
                         </div>
+                        <div class="col-12 text-end">
+                          <a href="{{ url()->previous() }}" class="btn btn-primary">Back</a>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Add</button>
+
+                    </form>
                     </div>
                 </div>
 
@@ -242,7 +190,23 @@
 
   <script>
     $('.btn-add').click(function() {
-      alert('kontol');-
+      let tbody = $('tbody');
+      let newTr = "<tr>";
+      newTr += "<td>#</td>";
+      newTr += "<td><button type='button' class='btn btn-danger' data-bs-toggle='modal' data-bs-target='#modalToggle'><i class='bx bx-trash me-1'></i>delete</button></td>";
+      newTr += "<td>";
+      newTr += "<select name='id_book[]' id=''>";
+      newTr += "<option value=''>Select books</option>";
+      // newTr += "@foreach ($books as $book)";
+      newTr += "<option value='{{ $book->id }}'>{{ $book->books_name }}</option>";
+      // newTr += "@endforeach"";
+      newTr += "</select>";
+      newTr += "</td>";
+      newTr += "<td><input type='date' name='dateOfloan[]' class='form-control'></td>";
+      newTr += "<td><input type='date' name='dateOfreturn[]' class='form-control'></td>";
+      newTr += "<td><input type='text' name='description[]' class='form-control'></td>";
+      newTr += "</tr>";
+      tbody.append(newTr);
     });
   </script>
   </body>

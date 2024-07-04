@@ -9,12 +9,16 @@
       </div>
       <div class="card-body">
 
-        <form action="{{ route('book.store') }}" method="POST">
+        <form action="{{ route('book.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
 
           <div class="mb-3">
             <label class="form-label" for="basic-default-fullname">Book name</label>
             <input name="books_name" type="text" class="form-control" id="basic-default-fullname" placeholder="Masukan nama lengkap anda"/>
+          </div>
+          <div class="mb-3">
+            <label for="formFile" class="form-label">Book image</label>
+            <input name="books_img" class="form-control" type="file" id="formFile" />
           </div>
           <div class="mb-3">
             <label class="form-label" for="basic-default-fullname">Publisher</label>

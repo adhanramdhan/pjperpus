@@ -9,9 +9,17 @@
       </div>
       <div class="card-body">
 
-        <form action="{{ route('book.update' , $edit->id) }}" method="POST">
+        <form action="{{ route('book.update' , $edit->id) }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
+            <div class="mb-3">
+              <label for="formFile" class="form-label">Book image</label>
+              <img src="{{ asset('upload/' . $edit->books_img) }}" width="100">
+            </div>
+            <div class="mb-3">
+              <label for="formFile" class="form-label">Change book image</label>
+              <input name="books_img" class="form-control" type="file" id="formFile" />
+            </div>
           <div class="mb-3">
             <label class="form-label" for="basic-default-fullname">Nama book</label>
             <input name="books_name" type="text" class="form-control" id="basic-default-fullname" value="{{ $edit->books_name}}"/>

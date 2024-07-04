@@ -2,12 +2,14 @@
 
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\HomepageController;
 use App\Http\Controllers\LevelController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+
 
 
 
@@ -53,3 +55,5 @@ Route::middleware(['auth', 'administrator'])->group(function(){
     Route::get('loaning' , [TransactionController::class, 'loaning'])->name('loaning');
     Route::post('loaningstore' , [TransactionController::class, 'loaningstore'])->name('loaningstore');
     // Route::get('loaningstore' , [TransactionController::class, 'loaningstore']);
+
+    Route::resource('home', HomepageController::class);

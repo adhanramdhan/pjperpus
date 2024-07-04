@@ -18,6 +18,7 @@
           <tr>
             <th>No</th>
             <th>Action</th>
+            <th>Books image</th>
             <th>Books name</th>
             <th>genre</th>
             <th>Qty</th>
@@ -87,6 +88,13 @@
                                 </div>
                     </div>
                 </div>
+            </td>
+            <td>
+                @if(isset($data->books_img))   
+                <img src="{{ asset('upload/' . $data->books_img) }}" width="100">
+            @else
+                <span>No Image</span>
+            @endif
             </td>
             <td>{{$data->books_name}}</td>
             <td>{{$data->genre}}</td>

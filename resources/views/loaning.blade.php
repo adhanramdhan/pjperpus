@@ -49,55 +49,55 @@
                       <i class="bx bx-printer me-1"></i>print
                     </a>
 
-                      <div class="col-lg-4 col-md-6">
-                        <div class="mt-3">
-      
-                          <button
-                          type="button"
-                          class="btn btn-danger"
-                          data-bs-toggle="modal"
-                          data-bs-target="#modalToggle"
-                          >
-                          <i class="bx bx-trash me-1"></i>delete
-                          </button>
-      
-                          <!-- Modal 1-->
-                            <div
-                            class="modal fade"
-                            id="modalToggle"
-                            aria-labelledby="modalToggleLabel"
-                            tabindex="-1"
-                            style="display: none"
-                            aria-hidden="true"
-                            >
-                                          <div class="modal-dialog modal-dialog-centered">
-                                              <div class="modal-content">
-                                                <div class="modal-header">
-                                                  <h5 class="modal-title" id="modalToggleLabel">
-                                                      Apakah anda yakin ingin menghapus data ini?
-                                                    </h5>
-                                                    <button
-                                                      type="button"
-                                                      class="btn-close"
-                                                      data-bs-dismiss="modal"
-                                                      aria-label="Close"
-                                                  ></button>
-                                                  </div>
-                                                  <div class="modal-body">
-                                                      Data yang terhapus akan dipindahkan ke riwayat hapus. Anda yakin?
-                                                  </div>
-                                                  <div class="modal-footer">
-                                                      <form action="" method="POST">
-                                                          @csrf
-                                                          @method('DELETE')
-                                                          <button type="submit" class="btn btn-danger">
-                                                              <i class="bx bx-trash me-1"></i> Ya, Hapus!</button>
-                                                      </form>
-                                                  </div>
+                    <button
+                    type="button"
+                    class="btn btn-danger"
+                    data-bs-toggle="modal"
+                    data-bs-target="#modalToggle"
+                    >
+                    <i class="bx bx-trash me-1"></i>delete
+                    </button>
+                    <div class="mt-3">
+  
+  
+                      <!-- Modal 1-->
+                        <div
+                        class="modal fade"
+                        id="modalToggle"
+                        aria-labelledby="modalToggleLabel"
+                        tabindex="-1"
+                        style="display: none"
+                        aria-hidden="true"
+                        >
+                                      <div class="modal-dialog modal-dialog-centered">
+                                          <div class="modal-content">
+                                            <div class="modal-header">
+                                              <h5 class="modal-title" id="modalToggleLabel">
+                                                  Apakah anda yakin ingin menghapus data ini?
+                                                </h5>
+                                                <button
+                                                  type="button"
+                                                  class="btn-close"
+                                                  data-bs-dismiss="modal"
+                                                  aria-label="Close"
+                                              ></button>
+                                              </div>
+                                              <div class="modal-body">
+                                                  Data yang terhapus akan dipindahkan ke riwayat hapus. Anda yakin?
+                                              </div>
+                                              <div class="modal-footer">
+                                                  <form action="" method="POST">
+                                                      @csrf
+                                                      @method('DELETE')
+                                                      <button type="submit" class="btn btn-danger">
+                                                          <i class="bx bx-trash me-1"></i> Ya, Hapus!</button>
+                                                  </form>
                                               </div>
                                           </div>
-                            </div>
+                                      </div>
                         </div>
+                    </div>
+                      <div class="col-lg-4 col-md-6">
                       </div>
                   </td>
                   

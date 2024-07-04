@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Book;
 use App\Models\loan;
 use App\Models\member;
 use Illuminate\Http\Request;
@@ -80,8 +81,9 @@ class TransactionController extends Controller
         // $datas = $query;
         $search = $request->input('search');
         $transactionCode = $this->GCTrx();
+        $books = Book::all();
         $memberz = Member::where('member_name', 'like', '%' . $search . '%')->first();
-        return view('transaction' , compact('members' , 'memberz' , 'transactionCode'));
+        return view('transaction' , compact('members' , 'memberz' , 'transactionCode' , 'books'));
     }
     public function returnabook()
     {
@@ -105,12 +107,25 @@ class TransactionController extends Controller
     $crit = $request->validate([
         'id_member' => 'required',
         'no_trx' => 'required',
+        'id_book' => 'required',
+        'id_loaners' => 'required',
+        'dateOfreturn' => 'required',
+        'dateOfreturn' => 'required',
+        'description' => 'nullable',
       
     ]);
 
     loan::create($crit);
+
+    $book = Book::find($request->id_book);
+    
+    
+
+
        return redirect()->route('loaning')->with('success' , 'Berhasil melakukan transaksi pinjam');
     }
+
+
 
     private function GCTrx()
     {
@@ -119,6 +134,16 @@ class TransactionController extends Controller
         $time = now()->format('His'); // Format waktu: HHMMSS
 
         return 'TRX-' . $date . '-' . $time . '-' . $userId;
+    }
+
+    public function trxstore(Request $request)
+    {
+       $loans = loan::create($request->all());
+        $book = Book::find($request->book_id);
+        foreach ($loans as $value) {
+
+        }
+
     }
 
 

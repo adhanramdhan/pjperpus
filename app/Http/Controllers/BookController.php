@@ -29,7 +29,25 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
-        Book::create($request->all());
+        if ($request->hasFile('books_img')) {
+            $image = $request->file('books_img');
+            $imageName = time() . '_' . $image->getClientOriginalName();
+            $image->move(public_path('upload'), $imageName);
+    
+            // Save the record
+            Book::create([
+                'books_img' => $imageName,
+                'books_name' => $request->books_name,
+                'genre' => $request->genre,
+                'qty' => $request->qty,
+                'publisher' => $request->publisher,
+                'author' => $request->author,
+                'description' => $request->description,
+            ]);
+
+
+        }
+        // Book::create($request->all());
         return redirect()->route('book.index')->with('success' , 'Berhasil membuat data buku');
     }
 
@@ -55,7 +73,26 @@ class BookController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        Book::where('id' , $id)->update([
+
+        if ($request->hasFile('books_img')) {
+            $image = $request->file('books_img');
+            $imageName = time(). '_'. $image->getClientOriginalName();
+            $image->move(public_path('upload'), $imageName);
+
+            
+            Book::where('id' , $id)->update([
+            'books_img' => $imageName,
+            'books_name' => $request->books_name,
+            'author' => $request->author,   
+            'genre' => $request->genre,
+            'qty' => $request->qty,
+            'publisher' => $request->publisher,
+            'description' => $request->description,
+        ]);
+    } else {
+        
+            
+            Book::where('id' , $id)->update([
             'books_name' => $request->books_name,
             'author' => $request->author,
             'genre' => $request->genre,
@@ -63,6 +100,7 @@ class BookController extends Controller
             'publisher' => $request->publisher,
             'description' => $request->description,
         ]);
+    }
         return redirect()->route('book.index')->with('success' , 'Berhasil update data buku');
     }
 
