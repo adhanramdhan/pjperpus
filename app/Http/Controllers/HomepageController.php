@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Book;
 use Illuminate\Http\Request;
 
 class HomepageController extends Controller
@@ -11,7 +12,8 @@ class HomepageController extends Controller
      */
     public function index()
     {
-        return view('homepage.index');
+        $books = Book::get();
+        return view('homepage.index' , compact('books'));
     }
 
     /**

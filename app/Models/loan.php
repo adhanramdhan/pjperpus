@@ -14,4 +14,10 @@ class loan extends Model
     {
         return $this->belongsTo(member::class , 'id_member');
     }
+
+    public function dls()
+    {
+        return $this->hasMany(detail_loaners::class , 'id_loaners');
+    }
+
 }

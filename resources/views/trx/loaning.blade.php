@@ -4,7 +4,7 @@
 @section('content')
 
 <div class="card">
-    <h5 class="card-header">Data member</h5>
+    <h5 class="card-header">Data LOAN</h5>
     <div class="table-responsive text-nowrap">
         <div class="mx-5 divider text-end">
 
@@ -41,64 +41,80 @@
                   <td>{{ $data->no_trx }}</td>
                   <td>{{ $data->loanname->member_name }}</td>
                   <td>
-                    <a class="btn btn-info" href="">
-                      <i class="bx bx-detail me-1"></i>detail
-                    </a>
-
-                    <a class="btn btn-primary" href="">
-                      <i class="bx bx-printer me-1"></i>print
-                    </a>
-
-                    <button
-                    type="button"
-                    class="btn btn-danger"
-                    data-bs-toggle="modal"
-                    data-bs-target="#modalToggle"
-                    >
-                    <i class="bx bx-trash me-1"></i>delete
-                    </button>
-                    <div class="mt-3">
-  
-  
-                      <!-- Modal 1-->
-                        <div
-                        class="modal fade"
-                        id="modalToggle"
-                        aria-labelledby="modalToggleLabel"
-                        tabindex="-1"
-                        style="display: none"
-                        aria-hidden="true"
+                    <div class="col-lg-4 col-md-6">
+                      <div class="mt-3">
+                        <!-- Button trigger modal -->
+                        <button
+                          type="button"
+                          class="btn btn-primary"
+                          data-bs-toggle="modal"
+                          data-bs-target="#modalCenter{{ $data->id }}"
                         >
-                                      <div class="modal-dialog modal-dialog-centered">
-                                          <div class="modal-content">
-                                            <div class="modal-header">
-                                              <h5 class="modal-title" id="modalToggleLabel">
-                                                  Apakah anda yakin ingin menghapus data ini?
-                                                </h5>
-                                                <button
-                                                  type="button"
-                                                  class="btn-close"
-                                                  data-bs-dismiss="modal"
-                                                  aria-label="Close"
-                                              ></button>
-                                              </div>
-                                              <div class="modal-body">
-                                                  Data yang terhapus akan dipindahkan ke riwayat hapus. Anda yakin?
-                                              </div>
-                                              <div class="modal-footer">
-                                                  <form action="" method="POST">
-                                                      @csrf
-                                                      @method('DELETE')
-                                                      <button type="submit" class="btn btn-danger">
-                                                          <i class="bx bx-trash me-1"></i> Ya, Hapus!</button>
-                                                  </form>
-                                              </div>
-                                          </div>
-                                      </div>
+                          Detail
+                        </button>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="modalCenter{{ $data->id }}" tabindex="-1" aria-hidden="true">
+                          <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="modalCenterTitle">Detail loans</h5>
+                                <button
+                                  type="button"
+                                  class="btn-close"
+                                  data-bs-dismiss="modal"
+                                  aria-label="Close"
+                                ></button>
+                              </div>
+
+                              <div class="modal-body">
+                                <h5>no transaction: {{ $data->no_trx }}</h5>
+                                <dl class="row mt-2">
+                                  <dt class="col-sm-3">member</dt>
+                                  <dd class="col-sm-9">: {{ $data->loanname->member_name }}</dd>
+                          
+
+                                  <dt class="col-sm-3">borrowed book</dt>
+                                  <dd class="col-sm-9">:</dd>
+                                  @foreach ($data->dls as $detail)
+                                    
+                                  <dd class="col-sm-12">- - {{ $detail->books->books_name }}</dd>
+                                  @endforeach
+                                  
+                                  
+                                  <dt class="col-sm-3">Date of loan</dt>
+                                  <dd class="col-sm-9">
+                                   : {{ $detail->dateOfloan }}
+                                  </dd>
+          
+                                  <dt class="col-sm-3">Due return</dt>
+                                  <dd class="col-sm-9">: {{ $detail->dateOfreturn }}
+                                  </dd>
+
+                                      <dt class="col-sm-3">Description</dt>
+                                      <dd class="col-sm-9">
+                                        : {{ $detail->descriptions }}
+                                      </dd>
+                                    
+                                </dl>
+
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                                  Close
+                                </button>
+                                <button type="button" class="btn btn-primary">Save changes</button>
+                              </div>
+                            </div>
+                          </div>
                         </div>
-                    </div>
-                      <div class="col-lg-4 col-md-6">
                       </div>
+                    </div>
+                    
+                    <a class="btn btn-primary" href="{{ route('loans.print', $data->id) }}">
+                      <i class="bx bx-printer me-1"></i> Print
+                  </a>
+
                   </td>
                   
                 </tr>

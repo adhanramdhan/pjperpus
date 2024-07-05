@@ -51,9 +51,13 @@ Route::middleware(['auth', 'administrator'])->group(function(){
 
     Route::resource('transaction' , TransactionController::class);
     Route::get('showTrx' , [TransactionController::class, 'showTrx'])->name('showTrx');
-    Route::get('returnabook' , [TransactionController::class, 'returnabook'])->name('returnabook');
-    Route::get('loaning' , [TransactionController::class, 'loaning'])->name('loaning');
+    Route::get('returnabook' , [TransactionController::class, 'returnabook'])->name('trx.returnabook');
+    Route::get('loaning' , [TransactionController::class, 'loaning'])->name('trx.loaning');
     Route::post('loaningstore' , [TransactionController::class, 'loaningstore'])->name('loaningstore');
     // Route::get('loaningstore' , [TransactionController::class, 'loaningstore']);
+    // routes/web.php
+Route::get('loans/print/{id}', [TransactionController::class, 'printPDF'])->name('loans.print');
+
+Route::get('/search-members', [TransactionController::class, 'searchMembers'])->name('searchMembers');
 
     Route::resource('home', HomepageController::class);

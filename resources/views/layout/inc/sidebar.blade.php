@@ -43,7 +43,7 @@
         </a>
 
         <ul class="menu-sub">
-
+          
           @if (Auth::user()->id_level == 1)
           <li class="menu-item">
             <a href="{{ route('user.index') }}" class="menu-link">
@@ -56,6 +56,7 @@
             </a>
           </li>
           @endif
+          @if (in_array(Auth::user()->id_level , $karyawan))
           <li class="menu-item">
             <a href="{{ route('member.index') }}" class="menu-link">
               <div data-i18n="Container">Member</div>
@@ -79,7 +80,6 @@
       </li>
 
       
-      @if (in_array(Auth::user()->id_level , $karyawan))
       <li class="menu-item">
         <a href="javascript:void(0);" class="menu-link menu-toggle">
             <i class="menu-icon tf-icons bx bxs-data"></i>
@@ -88,7 +88,7 @@
           
           <ul class="menu-sub">
             <li class="menu-item">
-              <a href="{{ route('loaning') }}" class="menu-link">
+              <a href="{{ route('trx.loaning') }}" class="menu-link">
                 <div data-i18n="Container">Loan a book</div>
               </a>
             </li>
@@ -98,7 +98,7 @@
               </a>
             </li>
             <li class="menu-item">
-              <a href="{{ route('returnabook') }}" class="menu-link">
+              <a href="{{ route('trx.returnabook') }}" class="menu-link">
                 <div data-i18n="Without navbar">Return a book</div>
               </a>
             </li>
@@ -115,7 +115,7 @@
           
         @if (in_array(Auth::user()->id_level, $Alluser))
         <li class="menu-item">
-          <a href="#" class="menu-link">
+          <a href="{{ route('home.index') }}" class="menu-link">
             <i class="menu-icon tf-icons bx bx-home"></i>
             <div data-i18n="Analytics">Page for loan</div>
           </a>

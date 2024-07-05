@@ -3,8 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Book;
+use App\Models\detail_loaners;
 use App\Models\loan;
 use App\Models\member;
+// use Barryvdh\DomPDF\PDF;
+use Barryvdh\DomPDF\Facade\Pdf as PDF; 
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -15,7 +19,7 @@ class TransactionController extends Controller
      */
     public function index()
     {
-        return view('transaction');
+        return view('trx.transaction');
     }
 
     /**
@@ -39,7 +43,8 @@ class TransactionController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $show = detail_loaners::find($id);
+        return view('trx.show' , compact('show'));
     }
 
     /**
@@ -74,77 +79,96 @@ class TransactionController extends Controller
     public function showTrx(Request $request)
     {
         $members = member::all();
-        // $query = member::all();
-        // if($request->filled('search')){
-        //     $query->where('member_name', 'LIKE', '%'.$request->member_name.'%');
-        // }
-        // $datas = $query;
         $search = $request->input('search');
         $transactionCode = $this->GCTrx();
         $books = Book::all();
         $memberz = Member::where('member_name', 'like', '%' . $search . '%')->first();
-        return view('transaction' , compact('members' , 'memberz' , 'transactionCode' , 'books'));
+        $msname = Member::where('member_name', 'like', '%' . $search . '%')->get();
+        return view('trx.transaction' , compact('members' , 'memberz' , 'transactionCode' , 'books' , 'msname'));
     }
     public function returnabook()
     {
         // $datas = loan::all();
-        return view('returnabook');
+        return view('trx.returnabook');
     }
     public function loaning()
     {
-        $datas = loan::with('loanname')->get();
-        return view('loaning' , compact('datas'));
+        
+        $datas = loan::with(['loanname' , 'dls'])->get();
+        return view('trx.loaning' , compact('datas'));
     }
 
-    public function addloan()
-    {
-        
-    }
 
     public function loaningstore(Request $request)
     {
-    //    loan::create($request->all());
-    $crit = $request->validate([
-        'id_member' => 'required',
-        'no_trx' => 'required',
-        'id_book' => 'required',
-        'id_loaners' => 'required',
-        'dateOfreturn' => 'required',
-        'dateOfreturn' => 'required',
-        'description' => 'nullable',
-      
-    ]);
+        
 
-    loan::create($crit);
+        // Simpan data ke tabel loans
+        $loan = loan::create([
+            'no_trx' => $request->no_trx,
+            'id_member' => $request->id_member,
+        ]);
 
-    $book = Book::find($request->id_book);
-    
-    
+        // $loans = $loan->id;
+        // $record = loan::orderBy('id', 'desc')->first();
 
+        // Simpan data ke tabel detail_loans
+        foreach ($request->id_book as $index => $id_book) {
+            detail_loaners::create([
+                'id_loaners' => $loan->id,
+                'id_book' => $id_book,
+                'dateOfloan' => $request->dateOfloan[$index],
+                'dateOfreturn' => $request->dateOfreturn[$index],
+                'descriptions' => $request->descriptions[$index],
+            ]);
+        }
 
-       return redirect()->route('loaning')->with('success' , 'Berhasil melakukan transaksi pinjam');
+        return redirect()->to('loaning')->with('success', 'Loan created successfully!');
     }
 
 
 
     private function GCTrx()
     {
+        date_default_timezone_set("Asia/Jakarta");
+        $kod = loan::orderBy('id', 'desc')->first   ();
+        
         $userId = Auth::id();
-        $date = now()->format('Ymd'); // Format tanggal: YYYYMMDD
-        $time = now()->format('His'); // Format waktu: HHMMSS
+        $date = now()->format('Ymd');
+        $time = now()->format('His'); 
 
         return 'TRX-' . $date . '-' . $time . '-' . $userId;
     }
 
-    public function trxstore(Request $request)
+    public function printPDF($id)
     {
-       $loans = loan::create($request->all());
-        $book = Book::find($request->book_id);
-        foreach ($loans as $value) {
+        // Ambil data loan berdasarkan ID
+        $loan = Loan::with('loanname', 'dls')->findOrFail($id);
 
-        }
+        // Buat PDF dari view
+        $pdf = PDF::loadView('trx.pdf', compact('loan'));
 
+        $code = $this->GCpdf();
+        // Unduh PDF
+        return $pdf->download($code . '.pdf');
     }
+
+    private function GCpdf()
+    {
+        $name = Auth::id();
+        date_default_timezone_set("Asia/Jakarta");
+        $date = now()->format('dmYHi');
+        // $time = now()->format('His');
+
+        return 'TRX-' . $date . '-'. '-' . $name;
+    }
+
+    public function searchMembers(Request $request)
+{
+    $search = $request->input('search');
+    $members = member::where('member_name', 'like', '%' . $search . '%')->get();
+    return response()->json($members);
+}
 
 
 }

@@ -16,6 +16,7 @@
 
     <!-- Page JS -->
     <script src="{{ asset('assets/admin/assets/js/dashboards-analytics.js')}}"></script>
+    {{-- <script src="{{ asset('assets/admin/assets/js/slc.js')}}"></script> --}}
 
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="{{ asset('https://buttons.github.io/buttons.js')}}"></script>
